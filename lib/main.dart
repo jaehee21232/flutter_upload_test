@@ -4,8 +4,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:image_picker/image_picker.dart';
 import "dart:io";
-import 'package:flutter/src/rendering/box.dart';
 import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -38,9 +38,16 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
+  saveData() async {
+    var storage = await SharedPreferences.getInstance();
+    storage.setString("name", "john");
+    var result = storage.get("name"); 
+  }
+
   @override
   void initState() {
     super.initState();
+    saveData()
     getData();
   }
 
