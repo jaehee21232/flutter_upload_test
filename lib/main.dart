@@ -6,12 +6,16 @@ import 'package:image_picker/image_picker.dart';
 import "dart:io";
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(MaterialApp(
-    debugShowCheckedModeBanner: false,
-    home: MyApp(),
-    theme: theme,
+  runApp(ChangeNotifierProvider(
+    create: (c) => Store1(),
+    child: MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: MyApp(),
+      theme: theme,
+    ),
   ));
 }
 
@@ -40,14 +44,14 @@ class _MyAppState extends State<MyApp> {
 
   saveData() async {
     var storage = await SharedPreferences.getInstance();
-    storage.setString("name", "john");
-    var result = storage.get("name"); 
+    var map = {"age": 20};
+    storage.setString("map", jsonEncode(map));
   }
 
   @override
   void initState() {
     super.initState();
-    saveData()
+    saveData();
     getData();
   }
 
@@ -176,6 +180,26 @@ class _PostState extends State<Post> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      GestureDetector(
+                        child: Text(widget.data[i]["user"]),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            PageRouteBuilder(
+                              pageBuilder: (c, a1, a2) => Profile(),
+                              transitionsBuilder: (c, a1, a2, child) =>
+                                  SlideTransition(
+                                position: Tween(
+                                  begin: Offset(-1.0, 0.0),
+                                  end: Offset(0.0,
+                                      0.0), // -1.0은 왼쪽에서,위에서 아래로1.0은 오른쪽,아래에서 위로                                  end: Offset(0.0, 0.0),
+                                ).animate(a1),
+                                child: child,
+                              ),
+                            ),
+                          );
+                        },
+                      ),
                       Text(
                         "좋아요 ${widget.data[i]['likes']}",
                         style: TextStyle(fontWeight: FontWeight.bold),
@@ -265,5 +289,48 @@ class _UploadState extends State<Upload> {
                 ),
               ),
             ]));
+  }
+}
+
+class Store1 extends ChangeNotifier {
+  var name = "john kim";
+  changeName() {
+    name = "john park";
+    notifyListeners();
+  }
+
+  var follower = 0;
+  var clickfollowerbtn = true;
+  chfollower() {
+    if (clickfollowerbtn == true) {
+      follower++;
+      clickfollowerbtn = false;
+      notifyListeners();
+    } else if (clickfollowerbtn == false) {
+      follower++;
+      clickfollowerbtn = false;
+      notifyListeners();
+    }
+  }
+}
+
+class Profile extends StatelessWidget {
+  const Profile({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(context.watch<Store1>().name),
+      ),
+      body: Row(children: [
+        Text("팔로워 ${context.watch<Store1>().follower}명"),
+        ElevatedButton(
+            onPressed: () {
+              context.read<Store1>().chfollower();
+            },
+            child: Text("팔로우")),
+      ]),
+    );
   }
 }
