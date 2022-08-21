@@ -307,8 +307,8 @@ class Store1 extends ChangeNotifier {
       clickfollowerbtn = false;
       notifyListeners();
     } else if (clickfollowerbtn == false) {
-      follower++;
-      clickfollowerbtn = false;
+      follower--;
+      clickfollowerbtn = true;
       notifyListeners();
     }
   }
