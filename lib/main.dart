@@ -7,10 +7,14 @@ import "dart:io";
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:provider/provider.dart';
-
+import 'Providers/Store1.dart';
+import 'page/Post.dart';
 void main() {
-  runApp(ChangeNotifierProvider(
-    create: (c) => Store1(),
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (c) => UserName()),
+      ChangeNotifierProvider(create: (c) => Store1())
+    ],
     child: MaterialApp(
       debugShowCheckedModeBanner: false,
       home: MyApp(),
@@ -118,107 +122,6 @@ class _MyAppState extends State<MyApp> {
   }
 }
 
-class Post extends StatefulWidget {
-  Post({Key? key, this.data}) : super(key: key);
-  var data;
-
-  @override
-  State<Post> createState() => _PostState();
-}
-
-class _PostState extends State<Post> {
-  getmoredata() async {
-    var moredata = await http
-        .get(Uri.parse('https://codingapple1.github.io/app/more2.json'));
-    var moredata2 = jsonDecode(moredata.body);
-    setState(() {
-      widget.data.add(moredata2);
-    });
-  }
-
-  var scroll = ScrollController();
-
-  void initState() {
-    super.initState();
-    scroll.addListener(() {
-      if (scroll.position.pixels == scroll.position.maxScrollExtent) {
-        getmoredata();
-      }
-    });
-  }
-
-  setImage(i) {
-    if (widget.data[i]["image"].runtimeType == String) {
-      return Image.network(
-        widget.data[i]["image"],
-        fit: BoxFit.fill,
-      );
-    } else {
-      return Image.file(
-        widget.data[i]["image"],
-        fit: BoxFit.fill,
-      );
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    if (widget.data.isNotEmpty) {
-      return ListView.builder(
-        controller: scroll,
-        itemCount: widget.data.length,
-        itemBuilder: (c, i) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              setImage(i),
-              Container(
-                padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                child: SizedBox(
-                  height: 100,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      GestureDetector(
-                        child: Text(widget.data[i]["user"]),
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            PageRouteBuilder(
-                              pageBuilder: (c, a1, a2) => Profile(),
-                              transitionsBuilder: (c, a1, a2, child) =>
-                                  SlideTransition(
-                                position: Tween(
-                                  begin: Offset(-1.0, 0.0),
-                                  end: Offset(0.0,
-                                      0.0), // -1.0은 왼쪽에서,위에서 아래로1.0은 오른쪽,아래에서 위로                                  end: Offset(0.0, 0.0),
-                                ).animate(a1),
-                                child: child,
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                      Text(
-                        "좋아요 ${widget.data[i]['likes']}",
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      Text(widget.data[i]['date']),
-                      Text(widget.data[i]['content']),
-                    ],
-                  ),
-                ),
-              )
-            ],
-          );
-        },
-      );
-    } else {
-      return Text("로딩중");
-    }
-  }
-}
 
 class Upload extends StatefulWidget {
   Upload({Key? key, this.userImage, this.data}) : super(key: key);
@@ -292,45 +195,3 @@ class _UploadState extends State<Upload> {
   }
 }
 
-class Store1 extends ChangeNotifier {
-  var name = "john kim";
-  changeName() {
-    name = "john park";
-    notifyListeners();
-  }
-
-  var follower = 0;
-  var clickfollowerbtn = true;
-  chfollower() {
-    if (clickfollowerbtn == true) {
-      follower++;
-      clickfollowerbtn = false;
-      notifyListeners();
-    } else if (clickfollowerbtn == false) {
-      follower--;
-      clickfollowerbtn = true;
-      notifyListeners();
-    }
-  }
-}
-
-class Profile extends StatelessWidget {
-  const Profile({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(context.watch<Store1>().name),
-      ),
-      body: Row(children: [
-        Text("팔로워 ${context.watch<Store1>().follower}명"),
-        ElevatedButton(
-            onPressed: () {
-              context.read<Store1>().chfollower();
-            },
-            child: Text("팔로우")),
-      ]),
-    );
-  }
-}
