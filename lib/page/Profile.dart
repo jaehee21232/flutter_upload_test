@@ -11,7 +11,16 @@ class Profile extends StatelessWidget {
         appBar: AppBar(
           title: Text(context.watch<UserName>().name),
         ),
-        body: Text(""));
+        body: GridView.builder(
+          gridDelegate:
+              SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+          itemBuilder: (c, i) {
+            return Container(
+              color: Colors.grey,
+            );
+          },
+          itemCount: 3,
+        ));
   }
 }
 
