@@ -19,9 +19,10 @@ class Profile extends StatelessWidget {
             SliverGrid(
               delegate: SliverChildBuilderDelegate(
                   (c, i) => Container(
-                        color: Colors.grey,
+                        child: Image.network(
+                            context.watch<Store1>().profileimage[i]),
                       ),
-                  childCount: 9),
+                  childCount: context.watch<Store1>().profileimage.length),
               gridDelegate:
                   SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
             )
