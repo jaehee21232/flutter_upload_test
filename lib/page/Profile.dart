@@ -11,15 +11,21 @@ class Profile extends StatelessWidget {
         appBar: AppBar(
           title: Text(context.watch<UserName>().name),
         ),
-        body: GridView.builder(
-          gridDelegate:
-              SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-          itemBuilder: (c, i) {
-            return Container(
-              color: Colors.grey,
-            );
-          },
-          itemCount: 3,
+        body: CustomScrollView(
+          slivers: [
+            SliverToBoxAdapter(
+              child: ProfileHeader(),
+            ),
+            SliverGrid(
+              delegate: SliverChildBuilderDelegate(
+                  (c, i) => Container(
+                        color: Colors.grey,
+                      ),
+                  childCount: 9),
+              gridDelegate:
+                  SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+            )
+          ],
         ));
   }
 }
