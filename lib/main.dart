@@ -1,3 +1,4 @@
+import 'dart:ffi';
 import 'package:flut_3/Theme.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -9,6 +10,7 @@ import 'package:provider/provider.dart';
 import 'Providers/Store1.dart';
 import 'page/Post.dart';
 import 'page/upload.dart';
+import 'notification.dart';
 
 void main() {
   runApp(MultiProvider(
@@ -56,6 +58,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
+    initNotification(context);
     saveData();
     getData();
   }
@@ -63,6 +66,12 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          showNotification();
+        },
+        child: Text("알림"),
+      ),
       appBar: AppBar(
         elevation: 1,
         title: Text(
