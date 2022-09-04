@@ -1,4 +1,3 @@
-import 'dart:ffi';
 import 'package:flut_3/Theme.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -68,7 +67,7 @@ class _MyAppState extends State<MyApp> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          showNotification();
+          showNotification2();
         },
         child: Text("알림"),
       ),
