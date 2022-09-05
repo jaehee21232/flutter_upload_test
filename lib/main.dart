@@ -10,8 +10,14 @@ import 'Providers/Store1.dart';
 import 'page/Post.dart';
 import 'page/upload.dart';
 import 'notification.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (c) => UserName()),
@@ -106,7 +112,8 @@ class _MyAppState extends State<MyApp> {
       ),
       body: PageView(
         controller: PageController(
-          initialPage: 0, //0번째를 먼저 보여줌
+          initialPage: 0,
+          //0번째를 먼저 보여줌
         ),
         children: [
           Post(data: data),
