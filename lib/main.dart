@@ -10,8 +10,15 @@ import 'Providers/Store1.dart';
 import 'page/Post.dart';
 import 'page/upload.dart';
 import 'notification.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+import 'page/Shop.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (c) => UserName()),
@@ -110,7 +117,7 @@ class _MyAppState extends State<MyApp> {
         ),
         children: [
           Post(data: data),
-          Text("샵"),
+          Shop(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
