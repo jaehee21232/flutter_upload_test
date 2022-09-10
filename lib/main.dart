@@ -12,7 +12,10 @@ import 'page/upload.dart';
 import 'notification.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+<<<<<<< HEAD
 import 'page/Shop.dart';
+=======
+>>>>>>> 45ed66bf1a50159fe6d587cba121f77cf5d68fa6
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -113,7 +116,8 @@ class _MyAppState extends State<MyApp> {
       ),
       body: PageView(
         controller: PageController(
-          initialPage: 0, //0번째를 먼저 보여줌
+          initialPage: 0,
+          //0번째를 먼저 보여줌
         ),
         children: [
           Post(data: data),
