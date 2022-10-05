@@ -12,9 +12,13 @@ class Shop extends StatefulWidget {
 
 class _ShopState extends State<Shop> {
   getData() async {
-    var result = await firestore.collection('product').get();
-    for (var doc in result.docs) {
-      print(doc['name']); //모든 문서가져와서 name 출력
+    try {
+      var result = await firestore.collection('product').get();
+      for (var doc in result.docs) {
+        print(doc); //모든 문서가져와서 name 출력
+      }
+    } catch (e) {
+      print(e);
     }
   }
 

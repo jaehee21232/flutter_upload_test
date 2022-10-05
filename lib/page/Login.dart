@@ -14,8 +14,7 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  @override
-  getlogin() async {
+  getregister() async {
     try {
       var result = await auth.createUserWithEmailAndPassword(
           email: "k62533196@gmail.com", password: "123456");
@@ -26,18 +25,60 @@ class _LoginState extends State<Login> {
     }
   }
 
+  getlogin() async {
+    try {
+      await auth.signInWithEmailAndPassword(
+          email: "k62533196@gmail.com", password: "123456");
+    } catch (e) {
+      print(e);
+    }
+
+    if (auth.currentUser?.uid == null) {
+      print("로그인 안된상태");
+    } else {
+      print("로그인함");
+    }
+  }
+
+  getlogout() async {
+    await auth.signOut();
+  }
+
+  @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    getlogin();
+    getregister();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(child: 
-        TextButton(child: Text("로그인"),,)
-      ),
+      body: Center(
+          child: Column(
+        children: [
+          TextButton(
+            child: Text("로그인"),
+            onPressed: () {
+              getlogin();
+            },
+          ),
+          TextButton(
+            child: Text("로그아웃"),
+            onPressed: () {
+              getlogout();
+            },
+          ),
+          TextButton(
+              onPressed: () {
+                if (auth.currentUser?.uid == null) {
+                  print("로그인 안된상태");
+                } else {
+                  print("로그인함");
+                }
+              },
+              child: Text("현재상태"))
+        ],
+      )),
     );
   }
 }

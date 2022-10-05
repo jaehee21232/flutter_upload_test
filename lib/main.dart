@@ -12,10 +12,8 @@ import 'page/upload.dart';
 import 'notification.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
-<<<<<<< HEAD
 import 'page/Shop.dart';
-=======
->>>>>>> 45ed66bf1a50159fe6d587cba121f77cf5d68fa6
+import 'page/Login.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -67,7 +65,6 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    initNotification(context);
     saveData();
     getData();
   }
@@ -122,6 +119,7 @@ class _MyAppState extends State<MyApp> {
         children: [
           Post(data: data),
           Shop(),
+          Login(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(

@@ -44,39 +44,39 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDuUKanY-ajnNKV0WPTxSnC9v8kqgudDTY',
-    appId: '1:467431245181:web:61faecb178cb80a25eb814',
-    messagingSenderId: '467431245181',
-    projectId: 'flutter-apple-45a51',
-    authDomain: 'flutter-apple-45a51.firebaseapp.com',
-    storageBucket: 'flutter-apple-45a51.appspot.com',
+    apiKey: 'AIzaSyD1sls2DEZeN-uMdLR957HeuQFXdNFNDKs',
+    appId: '1:1041520466255:web:9180ddf2b629898ae38d3a',
+    messagingSenderId: '1041520466255',
+    projectId: 'fluttergram-2a2a4',
+    authDomain: 'fluttergram-2a2a4.firebaseapp.com',
+    storageBucket: 'fluttergram-2a2a4.appspot.com',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCKyuVPUaIXtDv1bqi6CYc4Ze5SH8Kzs7g',
-    appId: '1:467431245181:android:a02085008f8e19fb5eb814',
-    messagingSenderId: '467431245181',
-    projectId: 'flutter-apple-45a51',
-    storageBucket: 'flutter-apple-45a51.appspot.com',
+    apiKey: 'AIzaSyA43DZ5PKXB4hdgyjn0hWZXBAmmzU-e3UU',
+    appId: '1:1041520466255:android:55accb82ec287dc6e38d3a',
+    messagingSenderId: '1041520466255',
+    projectId: 'fluttergram-2a2a4',
+    storageBucket: 'fluttergram-2a2a4.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAyjeZ3i5T7XDV0ShXDMsICVsiAfDwc7AI',
-    appId: '1:467431245181:ios:2e5740239ed4c2c25eb814',
-    messagingSenderId: '467431245181',
-    projectId: 'flutter-apple-45a51',
-    storageBucket: 'flutter-apple-45a51.appspot.com',
-    iosClientId: '467431245181-ftpb16dcvt747m5t00gs9shug0c5q9nq.apps.googleusercontent.com',
+    apiKey: 'AIzaSyB9cuuoalAwhxCd8OmOA3Mx303X4wX9gxI',
+    appId: '1:1041520466255:ios:73606e6c44c3185be38d3a',
+    messagingSenderId: '1041520466255',
+    projectId: 'fluttergram-2a2a4',
+    storageBucket: 'fluttergram-2a2a4.appspot.com',
+    iosClientId: '1041520466255-tgdu5ih149kr692pheehical547s9t3g.apps.googleusercontent.com',
     iosBundleId: 'com.hanseijaehee.instagram',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyAyjeZ3i5T7XDV0ShXDMsICVsiAfDwc7AI',
-    appId: '1:467431245181:ios:2e5740239ed4c2c25eb814',
-    messagingSenderId: '467431245181',
-    projectId: 'flutter-apple-45a51',
-    storageBucket: 'flutter-apple-45a51.appspot.com',
-    iosClientId: '467431245181-ftpb16dcvt747m5t00gs9shug0c5q9nq.apps.googleusercontent.com',
+    apiKey: 'AIzaSyB9cuuoalAwhxCd8OmOA3Mx303X4wX9gxI',
+    appId: '1:1041520466255:ios:73606e6c44c3185be38d3a',
+    messagingSenderId: '1041520466255',
+    projectId: 'fluttergram-2a2a4',
+    storageBucket: 'fluttergram-2a2a4.appspot.com',
+    iosClientId: '1041520466255-tgdu5ih149kr692pheehical547s9t3g.apps.googleusercontent.com',
     iosBundleId: 'com.hanseijaehee.instagram',
   );
 }
