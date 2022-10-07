@@ -71,6 +71,8 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    print(MediaQuery.of(context).size.width);
+
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
